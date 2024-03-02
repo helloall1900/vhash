@@ -1,0 +1,16 @@
+.idea
+.vscode
+
+bin
+build
+cmake-build-*
+__pycache__
+
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+.DS_Store*
+*.pyc

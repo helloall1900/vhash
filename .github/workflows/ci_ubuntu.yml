@@ -1,0 +1,31 @@
+name: Ubuntu
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo add-apt-repository ppa:savoury1/ffmpeg4 -y
+        sudo add-apt-repository ppa:savoury1/ffmpeg5 -y
+        sudo apt-get update
+        sudo apt install libopencv-dev libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev
+        sudo apt install libfftw3-dev libsqlite3-dev libspdlog-dev
+        sudo apt install libgtest-dev libbenchmark-dev
+
+    - name: Make vhash
+      run: |
+        make dev
+
+    - name: Test vhash
+      run: |
+        make test
